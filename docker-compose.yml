@@ -6,3 +6,5 @@ services:
     ports:
       - "5072:5000"
     command: /app/run_server.sh
+    volumes:
+       - ./output:/output

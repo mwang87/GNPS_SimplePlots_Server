@@ -10,6 +10,9 @@ import json
 import requests
 import pandas as pd
 from plotnine import *
+import requests
+import requests_cache
+requests_cache.install_cache('/output/demo_cache')
 
 @app.route('/heartbeat', methods=['GET'])
 def heartbeat():
@@ -22,7 +25,12 @@ def simplebox():
     variable_value = int(request.values.get("variable_value"))
 
     url = "https://proteomics3.ucsd.edu/ProteoSAFe/DownloadResultFile?task={}&file=feature_statistics/data_long.csv".format(task)
-    long_data_df = pd.read_csv(url)
+    r = requests.get(url)
+    r.raise_for_status()
+    local_filename = os.path.join("/output", task + ".tsv")
+    with open(local_filename, "w") as output_file:
+        output_file.write(r.text)
+    long_data_df = pd.read_csv(local_filename)
 
     # Filtering the data
     if "metadata_conditions" in request.values:
