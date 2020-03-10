@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  gnps-plot-web:
+    build: .
+    ports:
+      - "5072:5000"
+    command: /app/run_server.sh
