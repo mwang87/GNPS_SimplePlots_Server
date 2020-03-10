@@ -10,19 +10,8 @@ server-compose-server:
 server-compose-production:
 	docker-compose -f docker-compose.yml -f docker-compose-production.yml up -d
 
-
-
-
-
-
 build:
-	docker build -t gnps_molecularblast .
+	docker build -t gnps_plot .
 
 build-no-cache:
-	docker build --no-cache -t gnps_molecularblast .
-
-server:
-	docker run -d -p 5052:5005 --rm --name gnps_molecularblast gnps_molecularblast /app/run_server.sh
-
-interactive:
-	docker run -it -p 5052:5005 --rm --name gnps_molecularblast gnps_molecularblast /app/run_server.sh
+	docker build --no-cache -t gnps_plot .

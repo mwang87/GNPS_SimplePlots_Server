@@ -8,3 +8,16 @@ services:
     command: /app/run_server.sh
     volumes:
        - ./output:/output
+    networks:
+      - default
+      - nginx-net
+    environment:
+      VIRTUAL_HOST: mingwangbeta.ucsd.edu
+      VIRTUAL_PORT: 5072
+      LETSENCRYPT_HOST: mingwangbeta.ucsd.edu
+      LETSENCRYPT_EMAIL: miw023@ucsd.edu
+
+networks:
+  nginx-net:
+    external:
+      name: nginx-net
