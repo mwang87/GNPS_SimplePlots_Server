@@ -36,7 +36,7 @@ def simplebox():
     )
 
     if "metadata_facet" in request.values:
-        p = p + facet_wrap(facet=request.values["metadata_facet"])
+        p = p + facet_wrap(facets=request.values["metadata_facet"])
 
     output_filename = "temp.png"
     p.save(output_filename)
